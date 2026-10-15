@@ -1,0 +1,52 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 380' width='680' height='380' font-family='Helvetica, Arial, sans-serif' font-size='12'>
+<rect width='680' height='380' fill='#fcfcfb'/>
+<text x='64' y='22' font-size='14' font-weight='600' fill='#0b0b0b'>Сценарий „faults“: грешки по секунди</text>
+<line x1='64' x2='540' y1='328.0' y2='328.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='332.0' text-anchor='end' fill='#898781'>0</text>
+<line x1='64' x2='540' y1='268.7' y2='268.7' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='272.7' text-anchor='end' fill='#898781'>2.5</text>
+<line x1='64' x2='540' y1='209.5' y2='209.5' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='213.5' text-anchor='end' fill='#898781'>5</text>
+<line x1='64' x2='540' y1='150.2' y2='150.2' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='154.2' text-anchor='end' fill='#898781'>7.5</text>
+<line x1='64' x2='540' y1='91.0' y2='91.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='95.0' text-anchor='end' fill='#898781'>10</text>
+<text transform='translate(16 200.0) rotate(-90)' text-anchor='middle' fill='#52514e'>брой събития</text>
+<text x='302.0' y='368' text-anchor='middle' fill='#52514e'>време от старта (s)</text>
+<line x1='64' x2='540' y1='328' y2='328' stroke='#898781' stroke-width='1'/>
+<text x='64.0' y='346' text-anchor='middle' fill='#898781'>0</text>
+<text x='182.6' y='346' text-anchor='middle' fill='#898781'>2.5</text>
+<text x='301.2' y='346' text-anchor='middle' fill='#898781'>5</text>
+<text x='419.8' y='346' text-anchor='middle' fill='#898781'>7.5</text>
+<text x='538.3' y='346' text-anchor='middle' fill='#898781'>10</text>
+<path d='M113.1,162.1 L160.5,91.0 L208.0,91.0 L255.3,138.4 L302.8,185.8 L350.2,209.5 L397.7,233.2 L445.1,114.7 L492.5,209.5 L540.0,91.0' fill='none' stroke='#2a78d6' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='113.1' cy='162.1' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='160.5' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='208.0' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='255.3' cy='138.4' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='302.8' cy='185.8' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='350.2' cy='209.5' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='397.7' cy='233.2' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='445.1' cy='114.7' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='492.5' cy='209.5' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<path d='M113.1,256.9 L160.5,233.2 L208.0,209.5 L255.3,114.7 L302.8,209.5 L350.2,209.5 L397.7,280.6 L445.1,328.0 L492.5,256.9 L540.0,280.6' fill='none' stroke='#eb6834' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='113.1' cy='256.9' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='160.5' cy='233.2' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='208.0' cy='209.5' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='255.3' cy='114.7' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='302.8' cy='209.5' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='350.2' cy='209.5' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='397.7' cy='280.6' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='445.1' cy='328.0' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='492.5' cy='256.9' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='280.6' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<line x1='546.0' x2='554.0' y1='91.0' y2='91.0' stroke='#2a78d6' stroke-width='2'/>
+<text x='558.0' y='95.0' fill='#0b0b0b'>повторни опити</text>
+<line x1='546.0' x2='554.0' y1='280.6' y2='280.6' stroke='#eb6834' stroke-width='2'/>
+<text x='558.0' y='284.6' fill='#0b0b0b'>отхвърлени</text>
+<line x1='64' x2='80' y1='40' y2='40' stroke='#2a78d6' stroke-width='3'/>
+<text x='84' y='44' font-size='11' fill='#52514e'>повторни опити</text>
+<line x1='186.39999999999998' x2='202.39999999999998' y1='40' y2='40' stroke='#eb6834' stroke-width='3'/>
+<text x='206.39999999999998' y='44' font-size='11' fill='#52514e'>отхвърлени</text>
+</svg>

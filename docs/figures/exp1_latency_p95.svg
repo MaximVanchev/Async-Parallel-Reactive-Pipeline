@@ -1,0 +1,100 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 380' width='680' height='380' font-family='Helvetica, Arial, sans-serif' font-size='12'>
+<rect width='680' height='380' fill='#fcfcfb'/>
+<text x='64' y='22' font-size='14' font-weight='600' fill='#0b0b0b'>Латентност p95 (приемане → резултат), логаритмична скала</text>
+<line x1='64' x2='540' y1='314.9' y2='314.9' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='318.9' text-anchor='end' fill='#898781'>2</text>
+<line x1='64' x2='540' y1='279.2' y2='279.2' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='283.2' text-anchor='end' fill='#898781'>5</text>
+<line x1='64' x2='540' y1='252.1' y2='252.1' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='256.1' text-anchor='end' fill='#898781'>10</text>
+<line x1='64' x2='540' y1='225.1' y2='225.1' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='229.1' text-anchor='end' fill='#898781'>20</text>
+<line x1='64' x2='540' y1='189.4' y2='189.4' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='193.4' text-anchor='end' fill='#898781'>50</text>
+<line x1='64' x2='540' y1='162.4' y2='162.4' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='166.4' text-anchor='end' fill='#898781'>100</text>
+<line x1='64' x2='540' y1='135.3' y2='135.3' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='139.3' text-anchor='end' fill='#898781'>200</text>
+<line x1='64' x2='540' y1='99.6' y2='99.6' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='103.6' text-anchor='end' fill='#898781'>500</text>
+<line x1='64' x2='540' y1='72.6' y2='72.6' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='76.6' text-anchor='end' fill='#898781'>1k</text>
+<text transform='translate(16 200.0) rotate(-90)' text-anchor='middle' fill='#52514e'>e2e p95 (ms)</text>
+<text x='302.0' y='368' text-anchor='middle' fill='#52514e'>целева входна честота (кадъра/s)</text>
+<line x1='64' x2='540' y1='328' y2='328' stroke='#898781' stroke-width='1'/>
+<text x='187.4' y='346' text-anchor='middle' fill='#898781'>2k</text>
+<text x='328.4' y='346' text-anchor='middle' fill='#898781'>4k</text>
+<text x='469.5' y='346' text-anchor='middle' fill='#898781'>6k</text>
+<path d='M64.0,308.6 L81.6,294.5 L116.9,105.1 L187.4,113.0 L257.9,113.4 L399.0,72.0 L540.0,113.9' fill='none' stroke='#2a78d6' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='64.0' cy='308.6' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='81.6' cy='294.5' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='116.9' cy='105.1' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='187.4' cy='113.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='257.9' cy='113.4' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='399.0' cy='72.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='113.9' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<path d='M64.0,314.8 L81.6,326.3 L116.9,99.2 L187.4,140.2 L257.9,139.5 L399.0,140.2 L540.0,138.8' fill='none' stroke='#eb6834' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='64.0' cy='314.8' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='81.6' cy='326.3' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='116.9' cy='99.2' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='187.4' cy='140.2' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='257.9' cy='139.5' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='399.0' cy='140.2' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='138.8' r='4' fill='#eb6834' stroke='#fcfcfb' stroke-width='2'/>
+<path d='M64.0,316.9 L81.6,327.2 L116.9,323.7 L187.4,323.3 L257.9,153.3 L399.0,158.9 L540.0,163.4' fill='none' stroke='#1baf7a' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='64.0' cy='316.9' r='4' fill='#1baf7a' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='81.6' cy='327.2' r='4' fill='#1baf7a' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='116.9' cy='323.7' r='4' fill='#1baf7a' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='187.4' cy='323.3' r='4' fill='#1baf7a' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='257.9' cy='153.3' r='4' fill='#1baf7a' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='399.0' cy='158.9' r='4' fill='#1baf7a' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='163.4' r='4' fill='#1baf7a' stroke='#fcfcfb' stroke-width='2'/>
+<path d='M64.0,315.2 L81.6,327.8 L116.9,325.2 L187.4,326.8 L257.9,235.3 L399.0,169.6 L540.0,171.8' fill='none' stroke='#eda100' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='64.0' cy='315.2' r='4' fill='#eda100' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='81.6' cy='327.8' r='4' fill='#eda100' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='116.9' cy='325.2' r='4' fill='#eda100' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='187.4' cy='326.8' r='4' fill='#eda100' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='257.9' cy='235.3' r='4' fill='#eda100' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='399.0' cy='169.6' r='4' fill='#eda100' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='171.8' r='4' fill='#eda100' stroke='#fcfcfb' stroke-width='2'/>
+<path d='M64.0,317.3 L81.6,294.6 L116.9,324.8 L187.4,308.9 L257.9,181.0 L399.0,167.8 L540.0,171.8' fill='none' stroke='#e87ba4' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='64.0' cy='317.3' r='4' fill='#e87ba4' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='81.6' cy='294.6' r='4' fill='#e87ba4' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='116.9' cy='324.8' r='4' fill='#e87ba4' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='187.4' cy='308.9' r='4' fill='#e87ba4' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='257.9' cy='181.0' r='4' fill='#e87ba4' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='399.0' cy='167.8' r='4' fill='#e87ba4' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='171.8' r='4' fill='#e87ba4' stroke='#fcfcfb' stroke-width='2'/>
+<path d='M64.0,317.7 L81.6,323.0 L116.9,328.0 L187.4,318.5 L257.9,165.0 L399.0,170.7 L540.0,171.4' fill='none' stroke='#008300' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='64.0' cy='317.7' r='4' fill='#008300' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='81.6' cy='323.0' r='4' fill='#008300' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='116.9' cy='328.0' r='4' fill='#008300' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='187.4' cy='318.5' r='4' fill='#008300' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='257.9' cy='165.0' r='4' fill='#008300' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='399.0' cy='170.7' r='4' fill='#008300' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='171.4' r='4' fill='#008300' stroke='#fcfcfb' stroke-width='2'/>
+<line x1='546.0' x2='554.0' y1='113.9' y2='113.9' stroke='#2a78d6' stroke-width='2'/>
+<text x='558.0' y='117.9' fill='#0b0b0b'>DOP 1</text>
+<line x1='546.0' x2='554.0' y1='138.8' y2='138.8' stroke='#eb6834' stroke-width='2'/>
+<text x='558.0' y='142.8' fill='#0b0b0b'>DOP 2</text>
+<line x1='546.0' x2='554.0' y1='163.4' y2='163.4' stroke='#1baf7a' stroke-width='2'/>
+<text x='558.0' y='167.4' fill='#0b0b0b'>DOP 4</text>
+<line x1='546.0' x2='554.0' y1='177.4' y2='177.4' stroke='#008300' stroke-width='2'/>
+<text x='558.0' y='181.4' fill='#0b0b0b'>DOP 15</text>
+<line x1='546.0' x2='554.0' y1='191.4' y2='191.4' stroke='#eda100' stroke-width='2'/>
+<text x='558.0' y='195.4' fill='#0b0b0b'>DOP 8</text>
+<line x1='546.0' x2='554.0' y1='205.4' y2='205.4' stroke='#e87ba4' stroke-width='2'/>
+<text x='558.0' y='209.4' fill='#0b0b0b'>DOP 12</text>
+<line x1='64' x2='80' y1='40' y2='40' stroke='#2a78d6' stroke-width='3'/>
+<text x='84' y='44' font-size='11' fill='#52514e'>DOP 1</text>
+<line x1='127.0' x2='143.0' y1='40' y2='40' stroke='#eb6834' stroke-width='3'/>
+<text x='147.0' y='44' font-size='11' fill='#52514e'>DOP 2</text>
+<line x1='190.0' x2='206.0' y1='40' y2='40' stroke='#1baf7a' stroke-width='3'/>
+<text x='210.0' y='44' font-size='11' fill='#52514e'>DOP 4</text>
+<line x1='253.0' x2='269.0' y1='40' y2='40' stroke='#eda100' stroke-width='3'/>
+<text x='273.0' y='44' font-size='11' fill='#52514e'>DOP 8</text>
+<line x1='316.0' x2='332.0' y1='40' y2='40' stroke='#e87ba4' stroke-width='3'/>
+<text x='336.0' y='44' font-size='11' fill='#52514e'>DOP 12</text>
+<line x1='385.6' x2='401.6' y1='40' y2='40' stroke='#008300' stroke-width='3'/>
+<text x='405.6' y='44' font-size='11' fill='#52514e'>DOP 15</text>
+</svg>

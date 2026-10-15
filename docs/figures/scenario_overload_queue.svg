@@ -1,0 +1,32 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 380' width='680' height='380' font-family='Helvetica, Arial, sans-serif' font-size='12'>
+<rect width='680' height='380' fill='#fcfcfb'/>
+<text x='64' y='22' font-size='14' font-weight='600' fill='#0b0b0b'>Сценарий „overload“: максимална дълбочина на опашката</text>
+<line x1='64' x2='540' y1='328.0' y2='328.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='332.0' text-anchor='end' fill='#898781'>0</text>
+<line x1='64' x2='540' y1='235.4' y2='235.4' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='239.4' text-anchor='end' fill='#898781'>100</text>
+<line x1='64' x2='540' y1='142.8' y2='142.8' stroke='#e1e0d9' stroke-width='1'/>
+<text x='56' y='146.8' text-anchor='end' fill='#898781'>200</text>
+<text transform='translate(16 200.0) rotate(-90)' text-anchor='middle' fill='#52514e'>кадъра в опашката</text>
+<text x='302.0' y='368' text-anchor='middle' fill='#52514e'>време от старта (s)</text>
+<line x1='64' x2='540' y1='328' y2='328' stroke='#898781' stroke-width='1'/>
+<text x='64.0' y='346' text-anchor='middle' fill='#898781'>0</text>
+<text x='180.5' y='346' text-anchor='middle' fill='#898781'>2.5</text>
+<text x='297.0' y='346' text-anchor='middle' fill='#898781'>5</text>
+<text x='413.5' y='346' text-anchor='middle' fill='#898781'>7.5</text>
+<text x='530.0' y='346' text-anchor='middle' fill='#898781'>10</text>
+<path d='M112.2,91.0 L158.8,91.0 L205.4,91.0 L252.0,91.0 L298.6,91.0 L345.2,91.0 L391.8,91.0 L438.4,91.0 L485.0,91.0 L531.6,91.0 L540.0,92.8' fill='none' stroke='#2a78d6' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='112.2' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='158.8' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='205.4' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='252.0' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='298.6' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='345.2' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='391.8' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='438.4' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='485.0' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='531.6' cy='91.0' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<circle cx='540.0' cy='92.8' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<line x1='546.0' x2='554.0' y1='92.8' y2='92.8' stroke='#2a78d6' stroke-width='2'/>
+<text x='558.0' y='96.8' fill='#0b0b0b'>max дълбочина</text>
+</svg>
