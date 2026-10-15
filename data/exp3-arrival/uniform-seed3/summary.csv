@@ -1,0 +1,4 @@
+policy,target_rate,dop,sensors,duration_s,status,offered_rate,throughput,received,processed,rejected,dropped,overruns,e2e_mean_ms,e2e_p50_ms,e2e_p95_ms,e2e_p99_ms,e2e_max_ms,queue_wait_mean_ms,queue_wait_p95_ms,proc_mean_ms,proc_p95_ms,age_p95_ms,max_queue_depth,cpu_cores,gen0,gen2,worker_threads
+Wait,800,2,16,6,Completed,806.2,800.245,4829,4829,0,0,0,7.002,1.484,55.937,96.336,158.248,5.517,53.89,1.485,1.549,69.34,124,1.47,1,1,9
+Wait,1100,2,16,6,Completed,688.2,602.352,4539,4539,0,0,992,247.152,2.498,1254.063,1439.5,1456.677,244.184,1249.577,2.968,5.822,1843.94,256,1.302,0,0,10
+Wait,1250,2,16,6,Completed,979.2,930.514,5670,5670,0,0,942,294.498,297.833,337.952,345.331,348.416,292.377,335.69,2.122,2.816,1317.421,256,2.131,0,0,6
