@@ -100,6 +100,66 @@ public static class ExperimentRunner
         Console.WriteLine($"Логически процесори:  {Environment.ProcessorCount}");
     }
 
+    /// <summary>
+    /// Контролно измерване: само изчислителният етап (Parallel.For над предварително
+    /// генерирани кадри), без канал, сензори и Rx. Показва тавана на хардуера за
+    /// дадена степен на паралелизъм — с него се сравнява пропускателността на целия поток.
+    /// </summary>
+    public static void ParallelBenchmark(PipelineOptions o, int[] dops, double secondsPerDop, string? csvPath)
+    {
+        using var analyzer = new SpectralAnalyzer(o.FrameSize, o.SampleRateHz, o.WelchSegment);
+        var rng = new Random(o.Seed);
+        var frames = Enumerable.Range(0, 64).Select(i =>
+        {
+            var gen = new SignalGenerator(i % 16, o.SampleRateHz, o.Seed);
+            var s = new double[o.FrameSize];
+            gen.Fill(s, i, 0, rng);
+            return new SensorFrame
+            {
+                SensorId = i % 16, Sequence = i, ProtocolVersion = SpectralAnalyzer.SupportedProtocol,
+                SampleRateHz = o.SampleRateHz, Samples = s, Length = o.FrameSize,
+                SampledTicks = 0, ReceivedTicks = 0,
+            };
+        }).ToArray();
+
+        var lines = new List<string> { "dop,frames,seconds,frames_per_s,cpu_cores" };
+        Console.WriteLine("DOP | кадъра/s | ускорение | CPU ядра");
+        double baseline = 0;
+        foreach (int dop in dops)
+        {
+            Parallel.For(0, dop * 20, new ParallelOptions { MaxDegreeOfParallelism = dop },
+                i => analyzer.Analyze(frames[i % frames.Length], 0)); // загряване
+
+            long done = 0;
+            var cpu0 = Process.GetCurrentProcess().TotalProcessorTime;
+            var sw = Stopwatch.StartNew();
+            long deadline = (long)(secondsPerDop * Stopwatch.Frequency);
+            Parallel.For(0, dop, new ParallelOptions { MaxDegreeOfParallelism = dop }, w =>
+            {
+                int k = w;
+                while (sw.ElapsedTicks < deadline)
+                {
+                    analyzer.Analyze(frames[k++ % frames.Length], 0);
+                    Interlocked.Increment(ref done);
+                }
+            });
+            sw.Stop();
+            double cpu = (Process.GetCurrentProcess().TotalProcessorTime - cpu0).TotalSeconds / sw.Elapsed.TotalSeconds;
+            double rate = done / sw.Elapsed.TotalSeconds;
+            if (baseline == 0) baseline = rate;
+            Console.WriteLine($"{dop,3} | {rate,8:F0} | {rate / baseline,9:F2} | {cpu,8:F2}");
+            lines.Add(string.Join(',', dop, done, sw.Elapsed.TotalSeconds.ToString("0.###", CultureInfo.InvariantCulture),
+                rate.ToString("0.#", CultureInfo.InvariantCulture), cpu.ToString("0.##", CultureInfo.InvariantCulture)));
+        }
+
+        if (csvPath is not null)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(csvPath))!);
+            File.WriteAllLines(csvPath, lines);
+            Console.WriteLine($"Записано: {Path.GetFullPath(csvPath)}");
+        }
+    }
+
     private static void WriteMachineInfo(string dir, PipelineOptions o)
     {
         var info = new
