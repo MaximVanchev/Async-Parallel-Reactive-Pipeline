@@ -6,52 +6,79 @@
 <title>Асинхронно, паралелно и реактивно програмиране</title>
 <style>
   :root {
-    --surface: #ffffff;
-    --text: #0b0b0b;
-    --text-2: #52514e;
-    --muted: #898781;
-    --rule: #e1e0d9;
-    --accent: #2a78d6;
-    --accent-2: #eb6834;
-    --code-bg: #f5f4f0;
+    --text: #000000;
+    --text-2: #333333;
+    --rule: #000000;
+    --rule-light: #bdbdbd;
+    --code-bg: #f4f4f4;
   }
-  @page { size: A4; margin: 18mm 17mm 18mm 17mm; }
-  html { background: var(--surface); }
-  body { font-family: "Charter", "Georgia", "Times New Roman", serif; font-size: 11pt; line-height: 1.5;
-         color: var(--text); background: var(--surface); max-width: 820px; margin: 0 auto; padding: 0 16px; }
-  h1, h2, h3, h4, .title, figcaption, th, .meta { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  h1 { font-size: 20pt; line-height: 1.2; margin: 0 0 6px; }
-  h2 { font-size: 14.5pt; margin: 26px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--rule); break-after: avoid; }
-  h3 { font-size: 12pt; margin: 18px 0 6px; break-after: avoid; }
-  p { margin: 6px 0 8px; text-align: justify; hyphens: auto; }
-  code, pre { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 8.6pt; }
-  code { background: var(--code-bg); padding: 0 3px; border-radius: 3px; }
-  pre { background: var(--code-bg); padding: 8px 10px; border-radius: 4px; overflow-x: auto; line-height: 1.38; break-inside: avoid; }
-  table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 9.3pt; break-inside: avoid; }
-  th, td { border-bottom: 1px solid var(--rule); padding: 4px 6px; text-align: left; vertical-align: top; }
-  th { color: var(--text-2); font-weight: 600; font-size: 8.8pt; }
+  /* A4; ляво поле 3 cm (подвързване), дясно 2 cm, горе/долу 2,5 cm; номер на страницата долу в средата. */
+  @page {
+    size: A4;
+    margin: 25mm 20mm 25mm 30mm;
+    @bottom-center { content: counter(page); font-family: "Times New Roman", Times, serif; font-size: 11pt; }
+  }
+  @page :first { @bottom-center { content: none; } }
+
+  html { background: #ffffff; }
+  body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; color: var(--text);
+         background: #ffffff; max-width: 820px; margin: 0 auto; padding: 0 16px; }
+
+  h1, h2, h3 { font-family: "Times New Roman", Times, serif; color: var(--text); break-after: avoid; }
+  h2 { font-size: 14pt; font-weight: 700; margin: 18pt 0 6pt; }
+  h3 { font-size: 12pt; font-weight: 700; margin: 12pt 0 6pt; }
+  p { margin: 0 0 6pt; text-align: justify; text-indent: 1.25cm; hyphens: auto; orphans: 3; widows: 3; }
+  li > p, td p, .caption, figcaption { text-indent: 0; }
+  ul, ol { margin: 0 0 6pt; padding-left: 1.25cm; text-align: justify; }
+  li { margin: 0 0 2pt; }
+
+  code, pre { font-family: "Courier New", Menlo, Consolas, monospace; }
+  code { font-size: 10.5pt; background: var(--code-bg); padding: 0 2px; }
+  pre { font-size: 9.5pt; line-height: 1.25; background: var(--code-bg); border: 1px solid var(--rule-light);
+        padding: 6pt 8pt; margin: 0 0 10pt; white-space: pre-wrap; overflow-wrap: anywhere; break-inside: avoid; }
+
+  /* Таблици: надпис отгоре, тънки линии, 11 pt */
+  table { border-collapse: collapse; width: 100%; margin: 0 0 12pt; font-size: 11pt; line-height: 1.3; break-inside: avoid; }
+  th, td { border: 1px solid var(--rule-light); padding: 3pt 5pt; text-align: left; vertical-align: top; }
+  th { font-weight: 700; background: #f2f2f2; }
   td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
-  figure { margin: 10px 0 14px; break-inside: avoid; }
-  figure img, figure svg { width: 100%; height: auto; display: block; }
-  figcaption { font-size: 9pt; color: var(--text-2); margin-top: 4px; }
-  .cover { min-height: 245mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
-  .cover .uni { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  .cover .uni img { width: 34mm; height: auto; margin-bottom: 4px; }
-  .cover .uni .name { font-size: 14pt; font-weight: 700; letter-spacing: 0.04em; }
-  .cover .uni .faculty { font-size: 11pt; color: var(--text-2); }
-  .cover .title { font-size: 24pt; font-weight: 700; line-height: 1.2; margin-top: 30mm; }
-  .cover .sub { font-size: 13pt; color: var(--text-2); margin-top: 10px; }
-  .meta { font-size: 10.5pt; color: var(--text-2); line-height: 1.8; }
-  .callout { border-left: 3px solid var(--accent); padding: 4px 12px; margin: 10px 0; background: #f6f9fd; break-inside: avoid; }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .toc ol { padding-left: 18px; margin: 4px 0; }
-  .toc li { margin: 2px 0; }
+  td code, th code { font-size: 10pt; overflow-wrap: anywhere; }
+  table.fixed { table-layout: fixed; }
+
+  /* Надписи: „Таблица N.“ над таблицата, „Фиг. N.“ под фигурата, „Листинг N.“ над кода */
+  .caption { font-size: 11pt; text-align: center; margin: 10pt 0 4pt; break-after: avoid; }
+  .caption b { font-weight: 700; }
+  figure { margin: 8pt 0 12pt; break-inside: avoid; }
+  figure img { width: 88%; height: auto; display: block; margin: 0 auto; }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption { font-size: 11pt; text-align: center; margin-top: 4pt; line-height: 1.3; }
+  .two { display: block; }
+
+  /* Заглавна страница */
+  .cover { min-height: 245mm; display: flex; flex-direction: column; justify-content: space-between;
+           text-align: center; break-after: page; }
+  .cover p { text-indent: 0; text-align: center; margin: 0; }
+  .cover .logo { width: 30mm; height: auto; margin: 0 auto 6pt; display: block; }
+  .cover .uni { font-size: 14pt; font-weight: 700; letter-spacing: 0.03em; }
+  .cover .faculty { font-size: 12pt; }
+  .cover .kind { font-size: 20pt; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 10pt; }
+  .cover .discipline { font-size: 14pt; margin-bottom: 14pt; }
+  .cover .topic-label { font-size: 12pt; }
+  .cover .title { font-size: 16pt; font-weight: 700; line-height: 1.3; margin: 4pt 10mm 8pt; }
+  .cover .sub { font-size: 12pt; font-style: italic; }
+  .cover .people { display: flex; justify-content: space-between; text-align: left; font-size: 12pt; line-height: 1.6; }
+  .cover .people div:last-child { text-align: right; }
+  .cover .place { font-size: 12pt; margin-top: 18mm; }
+
+  /* Съдържание */
+  .toc h2 { text-align: center; }
+  .toc ol { list-style: none; padding-left: 0; margin: 0; }
+  .toc li { margin: 0 0 3pt; }
+  .toc ol ol { padding-left: 1cm; }
+
   .pb { break-before: page; }
-  .small { font-size: 9pt; color: var(--text-2); }
-  ul, ol { margin: 4px 0 8px; padding-left: 22px; }
-  li { margin: 2px 0; }
-  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+  .small { font-size: 10.5pt; text-indent: 0; }
+  @media (max-width: 640px) { .cover .people { flex-direction: column; gap: 10pt; } }
   @media print { body { max-width: none; padding: 0; } a { color: inherit; text-decoration: none; } }
 </style>
 </head>
@@ -59,45 +86,77 @@
 
 <section class="cover">
   <div>
-    <div class="uni">
-      <img src="figures/tu-sofia-logo.svg" alt="Лого на Технически университет – София">
-      <div class="name">ТЕХНИЧЕСКИ УНИВЕРСИТЕТ – СОФИЯ</div>
-      <div class="faculty">Факултет по компютърни системи и технологии</div>
-    </div>
-    <div class="title">Интегриране на асинхронно, паралелно и реактивно програмиране</div>
-    <div class="sub">Курсова работа — поточна вибрационна диагностика на индустриални машини<br>.NET 8 · C# · Task, async/await · Parallel · System.Threading.Channels · System.Reactive</div>
+    <img class="logo" src="figures/tu-sofia-logo.svg" alt="Лого на Технически университет – София">
+    <p class="uni">ТЕХНИЧЕСКИ УНИВЕРСИТЕТ – СОФИЯ</p>
+    <p class="faculty">Факултет по компютърни системи и технологии</p>
   </div>
-  <div class="meta">
-    Изготвил: Максим Ванчев &nbsp;&nbsp; Фак. №: 121223097<br>
-    Факултет / специалност / група: ФКСТ, КСИ, 42<br>
-    Ръководител: Петър Маринов<br>
-    Дата: 15.10.2026
+  <div>
+    <p class="kind">КУРСОВА РАБОТА</p>
+    <p class="discipline">по дисциплината „Паралелно програмиране“</p>
+    <p class="topic-label">на тема:</p>
+    <p class="title">Интегриране на асинхронно, паралелно и реактивно програмиране</p>
+    <p class="sub">Поточна вибрационна диагностика на индустриални машини<br>(.NET 8, C#, Task, async/await, Parallel, System.Reactive)</p>
+  </div>
+  <div>
+    <div class="people">
+      <div>Изготвил: Максим Ванчев<br>Фак. №: 121223097<br>ФКСТ, КСИ, група 42</div>
+      <div>Ръководител:<br>Петър Маринов</div>
+    </div>
+    <p class="place">София, 2026</p>
   </div>
 </section>
 
-<section class="toc">
-  <h2>Съдържание</h2>
+<section class="toc pb">
+  <h2>СЪДЪРЖАНИЕ</h2>
   <ol>
-    <li>Задание и индивидуален вариант</li>
-    <li>Архитектура и поток на данните</li>
-    <li>Роля на всеки модел и аргументи за избора</li>
-    <li>Координация, обработване на грешки и прекратяване</li>
-    <li>Ключови моменти от реализацията</li>
-    <li>Методика на експерименталното изследване</li>
-    <li>Резултати</li>
-    <li>Анализ</li>
-    <li>Ограничения на архитектурата</li>
-    <li>Изводи</li>
-    <li>Приложение: компилиране, стартиране, възпроизвеждане</li>
+  <li>1. Задание и индивидуален вариант
+</li>
+  <li>2. Архитектура и поток на данните
+    <ol>
+      <li>2.1. Поток на данните за един кадър</li>
+    </ol></li>
+  <li>3. Роля на всеки модел и аргументи за избора
+</li>
+  <li>4. Координация, обработване на грешки и прекратяване
+    <ol>
+      <li>4.1. Натрупване на работа</li>
+      <li>4.2. Грешки</li>
+      <li>4.3. Прекратяване на два етапа</li>
+    </ol></li>
+  <li>5. Ключови моменти от реализацията
+</li>
+  <li>6. Методика на експерименталното изследване
+</li>
+  <li>7. Резултати
+    <ol>
+      <li>7.1. Пропускателност и латентност спрямо входната честота и степента на паралелизъм</li>
+      <li>7.2. Претоварване: обратен натиск срещу изхвърляне</li>
+      <li>7.3. Разпределение на пристиганията (експеримент 3)</li>
+      <li>7.4. Променливост на платформата и контролен експеримент с QoS</li>
+      <li>7.5. Сценарии с грешки и прекъсване</li>
+    </ol></li>
+  <li>8. Анализ
+    <ol>
+      <li>8.1. Кои компоненти използват асинхронност за вход/изход и кои — паралелизъм за изчисления?</li>
+      <li>8.2. Как се управляват натрупването на работа, грешките и завършването на потока?</li>
+      <li>8.3. Мащабиране и неговият таван</li>
+    </ol></li>
+  <li>9. Ограничения на архитектурата
+</li>
+  <li>10. Изводи
+</li>
+  <li>11. Приложение: компилиране, стартиране, възпроизвеждане
+</li>
   </ol>
 </section>
 
-<h2>1. Задание и индивидуален вариант</h2>
+<h2 class="pb">1. Задание и индивидуален вариант</h2>
 <p>Целта е да се изследва съчетаването на три модела за организация на изпълнението — <b>асинхронност</b> за вход/изход,
 <b>паралелизъм</b> за изчислително интензивна обработка и <b>реактивност</b> за управление на събития и нови резултати — в общ
 приложен сценарий. Разработено е конзолно приложение <code>StreamPipeline</code>, което приема, обработва и представя поток
 от вибрационни измервания.</p>
 
+<div class="caption"><b>Таблица 1.</b> Параметри на индивидуалния вариант</div>
 <table>
   <tr><th style="width:24%">Параметър</th><th>Избран вариант</th></tr>
   <tr><td>Източник на данни</td><td>16 отдалечени вибрационни сензора (акселерометри) на въртящи се машини. Всеки изпраща кадри от 16&nbsp;384 отчета при 25,6&nbsp;kHz (0,64&nbsp;s сигнал) по симулирана мрежова връзка с латентност 2&nbsp;ms ± 1&nbsp;ms. Сигналът съдържа честота на вала (24–55&nbsp;Hz) с хармоници, гаусов шум и — при 4 от сензорите — развиващ се дефект на външния пръстен на лагер (затихващи удари, възбуждащи резонанс около 3&nbsp;kHz, с честота BPFO&nbsp;=&nbsp;3,57·f<sub>вал</sub>). Генераторът е детерминиран (seed), т.е. входните данни са възпроизводими.</td></tr>
@@ -110,7 +169,7 @@
 и двете моделират изчакване на мрежата — пристигането на следващия кадър (разписание + латентност) и отлагането преди повторен опит
 след мрежова грешка. Цялата обработка е реално изчисление (собствена реализация на FFT по Cooley–Tukey).</p>
 
-<h2 class="pb">2. Архитектура и поток на данните</h2>
+<h2>2. Архитектура и поток на данните</h2>
 
 <figure>
 <svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif" font-size="12">
@@ -201,7 +260,7 @@
   <text x="25" y="386" font-size="10">stopCts (Duration, 1-во Ctrl+C) → спира само ReceiveAsync → канал затворен → опашката се изпразва → OnCompleted</text>
   <text x="25" y="402" font-size="10">hardCts (CancelAfter, 2-ро Ctrl+C, фатална грешка) → прекъсва WriteAsync и Parallel.ForEachAsync → остатъкът се отчита</text>
 </svg>
-<figcaption>Фигура 1. Архитектура: три етапа, свързани с ограничен канал и реактивен разпределител на събития. Червено — разпространение на грешки; пунктир — прекратяване.</figcaption>
+<figcaption><b>Фиг. 1.</b> Архитектура: три етапа, свързани с ограничен канал и реактивен разпределител на събития. Червено — разпространение на грешки; пунктир — прекратяване.</figcaption>
 </figure>
 
 <h3>2.1. Поток на данните за един кадър</h3>
@@ -214,8 +273,9 @@
 </ol>
 
 <h2>3. Роля на всеки модел и аргументи за избора</h2>
-<table>
-  <tr><th style="width:15%">Модел</th><th style="width:28%">Къде</th><th>Защо точно този модел</th></tr>
+<div class="caption"><b>Таблица 2.</b> Роля на всеки модел за организация на изпълнението</div>
+<table class="fixed">
+  <tr><th style="width:17%">Модел</th><th style="width:25%">Къде</th><th>Защо точно този модел</th></tr>
   <tr><td><b>Асинхронност</b><br><code>async/await</code></td>
       <td><code>SimulatedSensorClient.ReceiveAsync</code>, <code>RunSensorAsync</code> (повторни опити, <code>WriteAsync</code>)</td>
       <td>Приемът е ограничен от I/O: 16 връзки прекарват почти цялото си време в чакане на мрежата. С <code>await</code> чакащата операция не държи нишка — при 7000 кадъра/s 16-те сензора използват общо под 0,3 ядра. Синхронна реализация би изисквала по нишка на връзка и би се конкурирала с изчислителните работници за процесора. Обратният натиск също е асинхронен: <code>WriteAsync</code> при пълна опашка освобождава нишката.</td></tr>
@@ -230,11 +290,12 @@
       <td>Rx няма обратен натиск — бърз производител би препълнил паметта. Ограниченият канал е мостът между асинхронния и паралелния етап: развързва ги по скорост, ограничава натрупаната работа (най-много 256 кадъра ≈ 32&nbsp;MB) и избира политика при претоварване. Затварянето му (<code>TryComplete</code>) е сигналът за край на входа.</td></tr>
 </table>
 
-<h2 class="pb">4. Координация, обработване на грешки и прекратяване</h2>
+<h2>4. Координация, обработване на грешки и прекратяване</h2>
 <h3>4.1. Натрупване на работа</h3>
 <p>Работата може да се натрупа на три места и всяко е ограничено: (1) в устройството — ако консуматорът забави сензора с повече от 1&nbsp;s, най-старите кадри се губят (<i>overrun</i>); (2) в канала — най-много 256 кадъра; (3) в Rx — абонатите са синхронни и евтини (O(1) на събитие), а <code>Buffer(1 s)</code> държи само текущата секунда. При <code>Wait</code> пълната опашка забавя сензорите и загубата се премества в източника; при <code>DropOldest</code> загубата е в опашката, но в нея винаги остават най-новите данни.</p>
 
 <h3>4.2. Грешки</h3>
+<div class="caption"><b>Таблица 3.</b> Видове грешки и тяхното обработване</div>
 <table>
   <tr><th>Вид</th><th>Къде възниква</th><th>Обработка</th><th>Ефект върху потока</th></tr>
   <tr><td>Преходна мрежова грешка (<code>IOException</code>)</td><td>прием</td><td>до 3 повторни опита с експоненциално отлагане (20, 40, 80&nbsp;ms); кадърът се изисква отново, не се губи; събитие <code>SensorRetry</code></td><td>продължава</td></tr>
@@ -250,7 +311,8 @@
 <b>Твърдото прекратяване</b> (<code>CancelAfter</code>, второ Ctrl+C, фатална грешка) отменя <code>hardCts</code>, свързан с всички етапи: <code>WriteAsync</code> и <code>Parallel.ForEachAsync</code> се прекъсват веднага, а останалите в опашката кадри се преброяват и връщат в пула.</p>
 
 <h2>5. Ключови моменти от реализацията</h2>
-<p><b>Асинхронен прием с повторни опити</b> (<code>PipelineRunner.RunSensorAsync</code>, съкратено):</p>
+<p>Асинхронният прием с повторни опити е показан в листинг 1. Всяко изчакване (мрежа, отлагане, пълна опашка) е <code>await</code> и не държи нишка.</p>
+<div class="caption"><b>Листинг 1.</b> Асинхронен прием с повторни опити (PipelineRunner.RunSensorAsync, съкратено)</div>
 <pre>while (!ct.IsCancellationRequested)
 {
     SensorFrame frame;
@@ -266,7 +328,8 @@
     }
     await writer.WriteAsync(frame, hardCt);   // точка на обратен натиск
 }</pre>
-<p><b>Паралелна обработка</b> (<code>RunProcessingAsync</code>):</p>
+<p>Паралелният етап (листинг 2) консумира канала директно; локалните грешки се превръщат в събития, а фаталните излизат извън тялото и прекратяват всички работници.</p>
+<div class="caption"><b>Листинг 2.</b> Паралелна обработка (PipelineRunner.RunProcessingAsync)</div>
 <pre>return Parallel.ForEachAsync(reader.ReadAllAsync(),
     new ParallelOptions { MaxDegreeOfParallelism = dop, CancellationToken = ct },
     (frame, token) =&gt;
@@ -276,7 +339,8 @@
         finally { ArrayPool&lt;double&gt;.Shared.Return(frame.Samples); }
         return ValueTask.CompletedTask;          // FatalPipelineException излиза навън
     });</pre>
-<p><b>Реактивни аларми</b> (<code>ReactiveMonitor.Start</code>) — машина на състоянията с хистерезис, отделна за всеки сензор, без нито едно заключване и без изрично съхранявано състояние:</p>
+<p>Реактивните аларми (листинг 3) реализират машина на състоянията с хистерезис, отделна за всеки сензор, без нито едно заключване и без изрично съхранявано състояние.</p>
+<div class="caption"><b>Листинг 3.</b> Реактивни аларми (ReactiveMonitor.Start)</div>
 <pre>analyzed.GroupBy(r =&gt; r.SensorId)
         .SelectMany(g =&gt; g.Scan(HealthTracker.Initial(g.Key), (s, r) =&gt; s.Next(r))   // EWMA + хистерезис
                           .DistinctUntilChanged(s =&gt; s.State)                          // само промени
@@ -286,7 +350,8 @@
 <p><b>Ефективност.</b> Буферите на кадрите (128&nbsp;KB, т.е. в Large Object Heap) идват от <code>ArrayPool</code>, а работните масиви на FFT са <code>ThreadLocal</code> — затова при хиляди кадри в секунда има 0–1 събирания на боклук (gen2) за цяло изпълнение. Използва се Server GC.</p>
 <p><b>Тестове.</b> 13 xUnit теста: коректност на FFT/IFFT; откриване на честотата на вала и на дефекта; отхвърляне на NaN; фатален протокол; плавно спиране с пълно отчитане на кадрите; повредени кадри; отпаднал сензор; фатална грешка → <code>OnError</code> преди изтичане на времето; външно прекратяване; <code>DropOldest</code>; хистерезис; Rx веригата <code>GroupBy→Scan→DistinctUntilChanged</code>.</p>
 
-<h2 class="pb">6. Методика на експерименталното изследване</h2>
+<h2>6. Методика на експерименталното изследване</h2>
+<div class="caption"><b>Таблица 4.</b> Условия на експерименталното изследване</div>
 <table>
   <tr><th style="width:28%">Елемент</th><th>Стойност</th></tr>
   <tr><td>Машина</td><td>Apple M5 Pro, 15 логически процесора (5 производителни + 10 ефективни ядра), macOS 26 (Darwin 25.6), .NET 8.0.32, Arm64, Server GC, Release</td></tr>
@@ -303,10 +368,11 @@
 
 <h2>7. Резултати</h2>
 <h3>7.1. Пропускателност и латентност спрямо входната честота и степента на паралелизъм</h3>
-<figure><img src="figures/exp1_throughput.svg" alt="Пропускателност спрямо входна честота"><figcaption>Фигура 2. Докато входната честота е под капацитета, пропускателността я следва точно (идеалната линия y = x); над капацитета всяка крива се изравнява на стойност, определена от DOP.</figcaption></figure>
-<figure><img src="figures/exp1_latency_p95.svg" alt="Латентност p95"><figcaption>Фигура 3. Латентност p95 (логаритмична скала). Под насищане тя е ≈ 1,5–3&nbsp;ms (= цената на изчислението); при насищане скача с два порядъка до ≈ капацитет_на_опашката / пропускателност.</figcaption></figure>
-<p class="small">Забележка: точките DOP 2 при 1000/s (748/s, опашка 256) и DOP 1 при 5000/s (479/s) са засегнати от временното забавяне на работниците, описано в раздел 7.5; всички останали точки на DOP 1 и 2 са в интервала 775–790 и 1546–1570 кадъра/s.</p>
+<figure><img src="figures/exp1_throughput.svg" alt="Пропускателност спрямо входна честота"><figcaption><b>Фиг. 2.</b> Докато входната честота е под капацитета, пропускателността я следва точно (идеалната линия y = x); над капацитета всяка крива се изравнява на стойност, определена от DOP.</figcaption></figure>
+<figure><img src="figures/exp1_latency_p95.svg" alt="Латентност p95"><figcaption><b>Фиг. 3.</b> Латентност p95 (логаритмична скала). Под насищане тя е ≈ 1,5–3&nbsp;ms (= цената на изчислението); при насищане скача с два порядъка до ≈ капацитет_на_опашката / пропускателност.</figcaption></figure>
+<p class="small">Забележка: точките DOP 2 при 1000/s (748/s, опашка 256) и DOP 1 при 5000/s (479/s) са засегнати от временното забавяне на работниците, описано в раздел 7.4; всички останали точки на DOP 1 и 2 са в интервала 775–790 и 1546–1570 кадъра/s.</p>
 
+<div class="caption"><b>Таблица 5.</b> Мащабиране спрямо степента на паралелизъм (експеримент 1)</div>
 <table>
   <tr><th>DOP</th><th class="n">макс. пропускателност (кадъра/s)</th><th class="n">ускорение</th><th class="n">e2e p50 под насищане (ms)</th><th class="n">e2e p50 при насищане (ms)</th><th class="n">256 / пропуск. (ms)</th><th class="n">CPU (ядра)</th></tr>
   <tr><td>1</td><td class="n">790</td><td class="n">1,0</td><td class="n">1,6–1,8</td><td class="n">346–564</td><td class="n">324</td><td class="n">1,2</td></tr>
@@ -318,10 +384,11 @@
 </table>
 
 <div class="two">
-<figure><img src="figures/exp1_scaling.svg" alt="Мащабиране"><figcaption>Фигура 4. Максимална пропускателност на целия поток спрямо контролното измерване (само изчисления, <code>Parallel.For</code> без канал и Rx) и линейното ускорение.</figcaption></figure>
-<figure><img src="figures/exp1_cpu.svg" alt="CPU"><figcaption>Фигура 5. Използвани ядра при най-високата входна честота.</figcaption></figure>
+<figure><img src="figures/exp1_scaling.svg" alt="Мащабиране"><figcaption><b>Фиг. 4.</b> Максимална пропускателност на целия поток спрямо контролното измерване (само изчисления, <code>Parallel.For</code> без канал и Rx) и линейното ускорение.</figcaption></figure>
+<figure><img src="figures/exp1_cpu.svg" alt="CPU"><figcaption><b>Фиг. 5.</b> Използвани ядра при най-високата входна честота.</figcaption></figure>
 </div>
 
+<div class="caption"><b>Таблица 6.</b> Контролно измерване (само изчисления) спрямо целия поток</div>
 <table>
   <tr><th>DOP</th><th class="n">само изчисления (кадъра/s)</th><th class="n">ускорение</th><th class="n">CPU (ядра)</th><th class="n">цял поток (кадъра/s)</th></tr>
   <tr><td>1</td><td class="n">795</td><td class="n">1,00</td><td class="n">1,00</td><td class="n">790</td></tr>
@@ -334,10 +401,11 @@
 
 <h3>7.2. Претоварване: обратен натиск срещу изхвърляне</h3>
 <div class="two">
-<figure><img src="figures/exp2_loss.svg" alt="Загуби"><figcaption>Фигура 6. Дял на загубените кадри. При <code>Wait</code> загубата е в сензора (overrun), при <code>DropOldest</code> — в опашката.</figcaption></figure>
-<figure><img src="figures/exp2_latency.svg" alt="Латентност"><figcaption>Фигура 7. Латентност p95 от приемането до резултата.</figcaption></figure>
+<figure><img src="figures/exp2_loss.svg" alt="Загуби"><figcaption><b>Фиг. 6.</b> Дял на загубените кадри. При <code>Wait</code> загубата е в сензора (overrun), при <code>DropOldest</code> — в опашката.</figcaption></figure>
+<figure><img src="figures/exp2_latency.svg" alt="Латентност"><figcaption><b>Фиг. 7.</b> Латентност p95 от приемането до резултата.</figcaption></figure>
 </div>
-<figure><img src="figures/exp2_age.svg" alt="Възраст"><figcaption>Фигура 8. Възраст на данните p95 — колко „стар“ е сигналът, когато резултатът стане достъпен.</figcaption></figure>
+<figure><img src="figures/exp2_age.svg" alt="Възраст"><figcaption><b>Фиг. 8.</b> Възраст на данните p95 — колко „стар“ е сигналът, когато резултатът стане достъпен.</figcaption></figure>
+<div class="caption"><b>Таблица 7.</b> Wait срещу DropOldest при претоварване, DOP 2 (експеримент 2)</div>
 <table>
   <tr><th>Вход (кадъра/s)</th><th>Политика</th><th class="n">приети/s</th><th class="n">пропуск./s</th><th class="n">загубени</th><th class="n">e2e p95 (ms)</th><th class="n">възраст p95 (ms)</th></tr>
   <tr><td>2000</td><td>Wait</td><td class="n">1 409</td><td class="n">1 385</td><td class="n">1 510 overrun (15%)</td><td class="n">277</td><td class="n">1 267</td></tr>
@@ -349,6 +417,7 @@
 </table>
 
 <h3>7.3. Разпределение на пристиганията (експеримент 3)</h3>
+<div class="caption"><b>Таблица 8.</b> Чакане в опашката p95 при равномерни и поасонови пристигания (експеримент 3)</div>
 <table>
   <tr><th>Вход (кадъра/s)</th><th>Пристигания</th><th class="n">seed 1</th><th class="n">seed 2</th><th class="n">seed 3</th></tr>
   <tr><td>800</td><td>равномерни</td><td class="n">1,8 <span style='color:#898781'>(800/s)</span></td><td class="n">1,4 <span style='color:#898781'>(800/s)</span></td><td class="n">53,9 <span style='color:#898781'>(800/s)</span></td></tr>
@@ -358,17 +427,18 @@
   <tr><td>1250</td><td>равномерни</td><td class="n"><b>547,0 <span style='color:#898781'>(1145/s)</span></b></td><td class="n">51,1 <span style='color:#898781'>(1240/s)</span></td><td class="n"><b>335,7 <span style='color:#898781'>(931/s)</span></b></td></tr>
   <tr><td>1250</td><td>поасонови</td><td class="n">5,5 <span style='color:#898781'>(1281/s)</span></td><td class="n">5,3 <span style='color:#898781'>(1245/s)</span></td><td class="n"><b>151,8 <span style='color:#898781'>(954/s)</span></b></td></tr>
 </table>
-<p class="small">Стойност: чакане в опашката p95 (ms); в скоби — пропускателност. С <b>удебелен шрифт</b> са изпълненията, в които опашката се е напълнила (256) поради временно забавяне на работниците (вж. 7.5).</p>
+<p class="small">Стойност: чакане в опашката p95 (ms); в скоби — пропускателност. С <b>удебелен шрифт</b> са изпълненията, в които опашката се е напълнила (256) поради временно забавяне на работниците (вж. 7.4).</p>
 <p>Теорията на опашките предвижда, че при същата средна честота поасоновите пристигания (по-голяма вариация) дават по-голямо чакане близо до насищане. Данните <b>не позволяват надежден извод</b>: от четирите двойки, в които нито едното изпълнение не е засегнато от забавяне, поасоновите дават по-високо чакане в две (5,2 срещу 1,6&nbsp;ms при 1100/s; 15,7 срещу 1,4&nbsp;ms при 800/s), равно в една и по-ниско в една (5,3 срещу 51,1&nbsp;ms при 1250/s). Ефектът е по-малък от променливостта на платформата: 9 от 18 изпълнения съдържат епизод, в който капацитетът на двата работника временно пада от ≈ 1550 до 600–1000 кадъра/s.</p>
 
-<h3>7.5. Променливост на платформата и контролен експеримент с QoS</h3>
-<figure><img src="figures/exp4_qos.svg" alt="QoS"><figcaption>Фигура 9. Експеримент 4: латентност p95 в 8 повторения при 1100 кадъра/s и DOP 2, с QoS по подразбиране и с USER_INTERACTIVE (<code>--qos</code>). Без забавяне p95 е ≈ 3&nbsp;ms; стойностите над 150&nbsp;ms са изпълнения с епизод на забавяне.</figcaption></figure>
+<h3>7.4. Променливост на платформата и контролен експеримент с QoS</h3>
+<figure><img src="figures/exp4_qos.svg" alt="QoS"><figcaption><b>Фиг. 9.</b> Експеримент 4: латентност p95 в 8 повторения при 1100 кадъра/s и DOP 2, с QoS по подразбиране и с USER_INTERACTIVE (<code>--qos</code>). Без забавяне p95 е ≈ 3&nbsp;ms; стойностите над 150&nbsp;ms са изпълнения с епизод на забавяне.</figcaption></figure>
 <p>По време на забавянията и двете нишки са заети (CPU 2,0–2,2 ядра), но обработват по-малко кадри — т.е. изпълняват се по-бавно, а не са блокирани. Първоначалната хипотеза беше, че ОС ги премества на ефективните ядра. Тя е проверена с експеримент 4: работниците искат QoS клас USER_INTERACTIVE (<code>pthread_set_qos_class_self_np</code>), който подсказва на планировчика да ги държи на производителните ядра. Резултат: опашката се напълва в 5 от 8 изпълнения без QoS и в 7 от 8 с QoS — <b>хипотезата не се потвърждава</b>, подсказката не помага. Най-вероятното обяснение е конкуренция с други процеси на същия работен компютър (експерименти 1 и 2 са изпълнени по-рано, при по-слабо натоварена машина, и нямат такива епизоди), но причината не е установена окончателно. За архитектурата изводът е, че ограниченият буфер поглъща кратките епизоди без загуба на данни, а при по-дълги латентността стига тавана капацитет/пропускателност.</p>
 
 
-<h3>7.6. Сценарии с грешки и прекъсване</h3>
-<table>
-  <tr><th>Сценарий</th><th>Статус / край на Rx потока</th><th class="n">приети</th><th class="n">обработени</th><th>Отчетено</th></tr>
+<h3>7.5. Сценарии с грешки и прекъсване</h3>
+<div class="caption"><b>Таблица 9.</b> Резултати от сценариите с грешки и прекъсване</div>
+<table class="fixed">
+  <tr><th style="width:17%">Сценарий</th><th style="width:22%">Статус / край на Rx потока</th><th class="n" style="width:10%">приети</th><th class="n" style="width:13%">обработени</th><th>Отчетено</th></tr>
   <tr><td>normal (400/s, DOP 8, 10&nbsp;s)</td><td>Completed / OnCompleted</td><td class="n">4 015</td><td class="n">4 015</td><td>8 промени в здравето — само за сензорите с дефект (1, 5, 9, 13): Normal → Warning → Critical</td></tr>
   <tr><td>faults</td><td>Completed / OnCompleted</td><td class="n">3 838</td><td class="n">3 800</td><td>74 повторни опита, 38 отхвърлени кадъра (≈1%), сензор 3 извън линия след 3,1&nbsp;s; 3 800 + 38 = 3 838</td></tr>
   <tr><td>fatal</td><td>Faulted / OnError(FatalPipelineException)</td><td class="n">1 616</td><td class="n">1 614</td><td>спрян на 4,04&nbsp;s вместо 10&nbsp;s; 1 кадър в опашката + 1 фатален кадър</td></tr>
@@ -376,15 +446,15 @@
   <tr><td>overload (3000/s, DOP 2, DropOldest)</td><td>Completed / OnCompleted</td><td class="n">30 104</td><td class="n">14 275</td><td>15 829 изхвърлени; e2e p95 88&nbsp;ms</td></tr>
 </table>
 <div class="two">
-<figure><img src="figures/scenario_faults_errors.svg" alt="Грешки"><figcaption>Фигура 10. Сценарий faults: грешки по секунди. Пикът на повторните опити около 3-тата секунда е трайно отпадналият сензор (3 опита преди <code>SensorOffline</code>).</figcaption></figure>
-<figure><img src="figures/scenario_faults_throughput.svg" alt="Пропускателност faults"><figcaption>Фигура 11. Сценарий faults: след отпадането на сензор 3 пропускателността пада от 400 на ≈ 375/s (= 15/16), а потокът продължава.</figcaption></figure>
+<figure><img src="figures/scenario_faults_errors.svg" alt="Грешки"><figcaption><b>Фиг. 10.</b> Сценарий faults: грешки по секунди. Пикът на повторните опити около 3-тата секунда е трайно отпадналият сензор (3 опита преди <code>SensorOffline</code>).</figcaption></figure>
+<figure><img src="figures/scenario_faults_throughput.svg" alt="Пропускателност faults"><figcaption><b>Фиг. 11.</b> Сценарий faults: след отпадането на сензор 3 пропускателността пада от 400 на ≈ 375/s (= 15/16), а потокът продължава.</figcaption></figure>
 </div>
 <div class="two">
-<figure><img src="figures/scenario_fatal_throughput.svg" alt="fatal"><figcaption>Фигура 12. Сценарий fatal: потокът спира на 4-тата секунда.</figcaption></figure>
-<figure><img src="figures/scenario_cancel_queue.svg" alt="cancel"><figcaption>Фигура 13. Сценарий cancel: опашката е пълна (256) през цялото време до прекратяването.</figcaption></figure>
+<figure><img src="figures/scenario_fatal_throughput.svg" alt="fatal"><figcaption><b>Фиг. 12.</b> Сценарий fatal: потокът спира на 4-тата секунда.</figcaption></figure>
+<figure><img src="figures/scenario_cancel_queue.svg" alt="cancel"><figcaption><b>Фиг. 13.</b> Сценарий cancel: опашката е пълна (256) през цялото време до прекратяването.</figcaption></figure>
 </div>
 
-<h2 class="pb">8. Анализ</h2>
+<h2>8. Анализ</h2>
 <h3>8.1. Кои компоненти използват асинхронност за вход/изход и кои — паралелизъм за изчисления?</h3>
 <p><b>Асинхронни</b> са всички операции, при които се <i>чака</i>: четенето от сензора (<code>ReceiveAsync</code>), отлагането преди повторен опит и записът в пълна опашка (<code>WriteAsync</code>). Наблюдение: при 7000 кадъра/s и DOP 15 процесът използва ≈ 9,2 ядра, а контролното измерване — 8,1 ядра за същите изчисления; разликата (&lt; 1 ядро) включва 16-те асинхронни връзки, генерирането на сигнала (0,04&nbsp;ms/кадър) и Rx. Шестнадесет синхронни връзки биха изисквали 16 блокирани нишки.
 <b>Паралелни</b> са само анализите (<code>SpectralAnalyzer.Analyze</code>) — единственото място, където процесорът реално работи. Паралелизмът дава почти линейно ускорение до 4 работника (×2,0 при DOP 2, ×3,8 при DOP 4), а латентността под насищане не зависи от DOP (≈ 1,4&nbsp;ms), защото един кадър винаги се обработва от една нишка — паралелизмът увеличава пропускателността, не намалява латентността на отделния кадър.
@@ -392,7 +462,7 @@
 
 <h3>8.2. Как се управляват натрупването на работа, грешките и завършването на потока?</h3>
 <p><b>Натрупване.</b> Експериментите потвърждават, че опашката е единственото място с неограничено чакане и че то е ограничено от капацитета: при насищане латентността е почти точно <i>капацитет / пропускателност</i> (DOP 2: 175&nbsp;ms при 256/1566 = 163&nbsp;ms; DOP 15: 65&nbsp;ms при 63&nbsp;ms). Изборът на политика е <b>компромис между свежест и непрекъснатост</b>: при <code>Wait</code> обратният натиск връща загубата в сензора — резултатите са по-стари (възраст p95 ≈ 1,2&nbsp;s, защото сензорът изостава до размера на буфера си), но кадрите от всеки сензор пристигат в последователни серии; при <code>DropOldest</code> e2e латентността е 2–3 пъти по-ниска (55 срещу 183&nbsp;ms при 5000/s) и възрастта на данните е 20 пъти по-малка (58 срещу 1181&nbsp;ms), за сметка на повече изхвърлени кадри и малко по-ниска пропускателност (≈ 1440 срещу 1530/s, защото сензорите приемат всички 5000 кадъра/s и изразходват процесор за кадри, които после се изхвърлят). За мониторинг на машини, където е важно <i>текущото</i> състояние, по-подходяща е <code>DropOldest</code>.
-<b>Пристигания.</b> Теоретично поасоновите пристигания трябва да увеличат чакането близо до насищане; в чистите изпълнения това се наблюдава в 2 от 4 двойки, т.е. ефектът не може да бъде отделен от променливостта на платформата (раздели 7.4–7.5).
+<b>Пристигания.</b> Теоретично поасоновите пристигания трябва да увеличат чакането близо до насищане; в чистите изпълнения това се наблюдава в 2 от 4 двойки, т.е. ефектът не може да бъде отделен от променливостта на платформата (раздели 7.3–7.4).
 <b>Преходно забавяне.</b> При едно от изпълненията (запазено в <code>data/exp3-arrival-run0-transient-stall</code>) двата работника временно паднаха от ≈ 1500 до ≈ 600 кадъра/s за около 2&nbsp;s (вероятно миграция на нишките към ефективните ядра от планировчика на ОС). Опашката се напълни (256), латентността p95 стигна 565&nbsp;ms, а след възстановяването работниците изпразниха натрупаното с 1197 кадъра/s и латентността се върна на 2,7&nbsp;ms за една секунда — ограниченият буфер поглъща краткотрайни смущения, без загуба на данни.</p>
 <p><b>Грешки.</b> Сценарият <i>faults</i> показва, че локалните грешки не нарушават потока: 74 повторни опита и 38 отхвърлени кадъра не променят латентността (p95 1,65&nbsp;ms срещу 4,5&nbsp;ms в normal — разликата е шум от загряването), а отпадането на един сензор намалява входа точно с 1/16. Сценарият <i>fatal</i> показва обратното: една неустранима грешка спира целия поток почти веднага (зададена на 4,00&nbsp;s, статус <code>Faulted</code> на 4,04&nbsp;s) и достига до реактивните абонати като <code>OnError</code>.
 <b>Завършване.</b> При плавно спиране всеки приет кадър е обработен (normal: 4015 = 4015, 0 в опашката), а реактивният поток завършва с <code>OnCompleted</code> едва след като последният резултат е отразен — което се вижда от последния (непълен) ред на таблото. При твърдо прекратяване (<i>cancel</i>) загубата е точно преброена: 256 кадъра в опашката + 16 в сензорите. Rx получава <code>OnCompleted</code>, а не <code>OnError</code>, защото прекратяването е желано действие, а не повреда; статусът <code>Cancelled</code> е в отчета.</p>
@@ -420,6 +490,7 @@
 </ol>
 
 <h2>11. Приложение: компилиране, стартиране, възпроизвеждане</h2>
+<div class="caption"><b>Листинг 4.</b> Компилиране, тестове, стартиране и възпроизвеждане</div>
 <pre>dotnet build -c Release                     # компилиране
 dotnet test                                 # 13 теста
 dotnet run -c Release --project src/StreamPipeline -- scenario faults
@@ -427,6 +498,7 @@ dotnet run -c Release --project src/StreamPipeline -- run --rate 2000 --dop 4 --
 scripts/run-experiments.sh data             # всички експерименти (~8 мин.)
 scripts/build-docs.sh                       # графики + този PDF</pre>
 <p>В Visual Studio Code: отворете папката, F5 → изберете сценарий; задачите (build, test, експерименти, документация) са в <i>Terminal → Run Task</i>. Подробности — в <code>README.md</code>.</p>
+<div class="caption"><b>Таблица 10.</b> Файлове със сурови данни</div>
 <table>
   <tr><th>Файл / папка</th><th>Съдържание</th></tr>
   <tr><td><code>data/exp1-rate-x-dop/summary.csv</code></td><td>резюме на 42-те изпълнения; <code>runs/*/</code> — по кадър (<code>latencies.csv</code>), по секунда (<code>timeline.csv</code>), събития, нишки, <code>summary.json</code></td></tr>
