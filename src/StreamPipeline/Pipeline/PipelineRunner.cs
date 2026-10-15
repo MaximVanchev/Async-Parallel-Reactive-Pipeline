@@ -268,6 +268,7 @@ public sealed class PipelineRunner : IDisposable
 
         return Parallel.ForEachAsync(reader.ReadAllAsync(), options, (frame, token) =>
         {
+            if (_o.HighQos) ThreadQos.EnsureInteractive();
             long dequeued = Stopwatch.GetTimestamp();
             try
             {

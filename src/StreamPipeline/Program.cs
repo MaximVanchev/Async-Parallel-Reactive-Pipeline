@@ -72,8 +72,16 @@ try
         }
 
         case "bench":
-            ExperimentRunner.Benchmark(cli.Apply(new PipelineOptions()), int.Parse(cli.Get("frames") ?? "400"));
+        {
+            var options = cli.Apply(new PipelineOptions());
+            ExperimentRunner.Benchmark(options, int.Parse(cli.Get("frames") ?? "400"));
+            if (cli.GetList("dops", int.Parse) is { } benchDops)
+            {
+                Console.WriteLine();
+                ExperimentRunner.ParallelBenchmark(options, benchDops, 3, cli.Get("out"));
+            }
             return 0;
+        }
 
         default:
             Console.Error.WriteLine($"Непозната команда '{args[0]}'.");
@@ -141,8 +149,10 @@ static void PrintHelp()
           --seed <n>                 зародиш на генератора              (42)
           --out <папка>              къде да се запишат суровите данни
           --quiet                    без табло в конзолата
+          --qos                      macOS: работниците с QoS USER_INTERACTIVE (производителни ядра)
           --rates a,b,c  --dops a,b,c  --policies wait,drop   (за experiment)
           --frames <n>               (за bench)
+          --dops a,b,c --out f.csv   (за bench: контролно паралелно измерване без потока)
 
         Ctrl+C веднъж — плавно спиране; два пъти — твърдо прекратяване.
         """);
@@ -239,6 +249,7 @@ sealed class Cli
         if (Get("fatal-after") is { } fa) o = o with { FatalAfter = Sec(fa) };
         if (Get("cancel-after") is { } ca) o = o with { CancelAfter = Sec(ca) };
         if (Get("seed") is { } seed) o = o with { Seed = int.Parse(seed) };
+        if (Get("qos") is not null) o = o with { HighQos = true };
         if (Get("quiet") is not null) o = o with { ConsoleDashboard = false };
 
         if (o.DegreeOfParallelism < 1) throw new ArgumentException("--dop трябва да е ≥ 1.");

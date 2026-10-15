@@ -49,6 +49,9 @@ public sealed record PipelineOptions
     /// <summary>Твърдо прекратяване (CancellationToken) след това време.</summary>
     public TimeSpan? CancelAfter { get; init; }
 
+    /// <summary>macOS: работниците искат QoS USER_INTERACTIVE (предпочитат производителните ядра).</summary>
+    public bool HighQos { get; init; }
+
     public int Seed { get; init; } = 42;
     public bool ConsoleDashboard { get; init; } = true;
 }
