@@ -1,0 +1,46 @@
+{
+  // Terminal → Run Task… (или Cmd+Shift+B за build)
+  "version": "2.0.0",
+  "options": {
+    // .NET SDK може да е инсталиран в ~/.dotnet (dotnet-install.sh), а не в системния PATH.
+    "env": { "PATH": "${env:HOME}/.dotnet:${env:PATH}", "DOTNET_ROOT": "${env:HOME}/.dotnet" }
+  },
+  "tasks": [
+    {
+      "label": "build",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/CourseWork4.sln", "/property:GenerateFullPaths=true", "/consoleloggerparameters:NoSummary"],
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "test",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["test", "${workspaceFolder}/CourseWork4.sln"],
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "test", "isDefault": true }
+    },
+    {
+      "label": "build Release",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/CourseWork4.sln", "-c", "Release"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "експерименти (пълен набор, ~6 мин.)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/run-experiments.sh",
+      "dependsOn": "build Release",
+      "problemMatcher": []
+    },
+    {
+      "label": "графики + PDF документация",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/build-docs.sh",
+      "problemMatcher": []
+    }
+  ]
+}

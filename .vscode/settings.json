@@ -1,0 +1,11 @@
+{
+  "dotnet.defaultSolution": "CourseWork4.sln",
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true
+  },
+  "search.exclude": {
+    "data/**/runs": true,
+    "results": true
+  }
+}

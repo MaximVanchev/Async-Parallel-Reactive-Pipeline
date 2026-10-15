@@ -1,0 +1,83 @@
+{
+  // F5 → изберете конфигурация. Всяка се компилира автоматично (preLaunchTask: build).
+  // Таблото се извежда в Integrated Terminal; Ctrl+C веднъж = плавно спиране, два пъти = твърдо.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Сценарий: normal (400/s, DOP 8)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/StreamPipeline/bin/Debug/net8.0/StreamPipeline.dll",
+      "args": ["scenario", "normal", "--out", "results/vscode-normal"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Сценарий: faults (мрежови грешки, повредени кадри, отпаднал сензор)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/StreamPipeline/bin/Debug/net8.0/StreamPipeline.dll",
+      "args": ["scenario", "faults", "--out", "results/vscode-faults"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Сценарий: fatal (неустранима грешка → OnError)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/StreamPipeline/bin/Debug/net8.0/StreamPipeline.dll",
+      "args": ["scenario", "fatal", "--out", "results/vscode-fatal"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Сценарий: cancel (претоварване + твърдо прекратяване след 4 s)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/StreamPipeline/bin/Debug/net8.0/StreamPipeline.dll",
+      "args": ["scenario", "cancel", "--out", "results/vscode-cancel"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Сценарий: overload (DropOldest)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/StreamPipeline/bin/Debug/net8.0/StreamPipeline.dll",
+      "args": ["scenario", "overload", "--out", "results/vscode-overload"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Свободно изпълнение (пита за честота и DOP)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/StreamPipeline/bin/Debug/net8.0/StreamPipeline.dll",
+      "args": ["run", "--rate", "${input:rate}", "--dop", "${input:dop}", "--duration", "${input:duration}", "--out", "results/vscode-run"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Bench (цена на един кадър)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/StreamPipeline/bin/Debug/net8.0/StreamPipeline.dll",
+      "args": ["bench"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    { "id": "rate", "type": "promptString", "description": "Входна честота (кадри/s)", "default": "1000" },
+    { "id": "dop", "type": "promptString", "description": "Степен на паралелизъм", "default": "4" },
+    { "id": "duration", "type": "promptString", "description": "Продължителност (s)", "default": "10" }
+  ]
+}
