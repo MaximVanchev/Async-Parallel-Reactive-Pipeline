@@ -96,3 +96,8 @@ scripts/      run-experiments.sh, make_charts.py, build-docs.sh
 data/         сурови експериментални данни (CSV/JSON) + machine.json
 docs/         документация (HTML → PDF) и графики
 ```
+
+## Лиценз на използваните ресурси
+
+Логото на Технически университет – София (`docs/figures/tu-sofia-logo.svg`) е от
+[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Tu-sofia-logo.svg), лиценз CC BY-SA 3.0.

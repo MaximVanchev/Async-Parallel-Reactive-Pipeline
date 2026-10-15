@@ -35,7 +35,12 @@
   figure img, figure svg { width: 100%; height: auto; display: block; }
   figcaption { font-size: 9pt; color: var(--text-2); margin-top: 4px; }
   .cover { min-height: 245mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
-  .cover .title { font-size: 24pt; font-weight: 700; line-height: 1.2; margin-top: 50mm; }
+  .cover .uni { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .cover .uni img { width: 34mm; height: auto; margin-bottom: 4px; }
+  .cover .uni .name { font-size: 14pt; font-weight: 700; letter-spacing: 0.04em; }
+  .cover .uni .faculty { font-size: 11pt; color: var(--text-2); }
+  .cover .title { font-size: 24pt; font-weight: 700; line-height: 1.2; margin-top: 30mm; }
   .cover .sub { font-size: 13pt; color: var(--text-2); margin-top: 10px; }
   .meta { font-size: 10.5pt; color: var(--text-2); line-height: 1.8; }
   .callout { border-left: 3px solid var(--accent); padding: 4px 12px; margin: 10px 0; background: #f6f9fd; break-inside: avoid; }
@@ -54,6 +59,11 @@
 
 <section class="cover">
   <div>
+    <div class="uni">
+      <img src="figures/tu-sofia-logo.svg" alt="Лого на Технически университет – София">
+      <div class="name">ТЕХНИЧЕСКИ УНИВЕРСИТЕТ – СОФИЯ</div>
+      <div class="faculty">Факултет по компютърни системи и технологии</div>
+    </div>
     <div class="title">Интегриране на асинхронно, паралелно и реактивно програмиране</div>
     <div class="sub">Курсова работа — поточна вибрационна диагностика на индустриални машини<br>.NET 8 · C# · Task, async/await · Parallel · System.Threading.Channels · System.Reactive</div>
   </div>
