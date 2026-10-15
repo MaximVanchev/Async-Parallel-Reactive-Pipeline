@@ -1,0 +1,9 @@
+type,sensor,detail
+health,1,Warning index=0.082 seq=534
+health,5,Warning index=0.085 seq=562
+health,5,Critical index=0.174 seq=610
+health,9,Warning index=0.085 seq=682
+health,1,Critical index=0.173 seq=693
+health,13,Warning index=0.086 seq=721
+health,9,Critical index=0.171 seq=757
+health,13,Critical index=0.178 seq=765
