@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{48758263-8286-4AB3-9C9F-49996F82BA2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamPipeline", "src\StreamPipeline\StreamPipeline.csproj", "{0E9A5CF7-013E-443A-ABD9-32659E9CD0EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{422D7A9C-3D98-4BBA-A152-DDAC305A27A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamPipeline.Tests", "tests\StreamPipeline.Tests\StreamPipeline.Tests.csproj", "{4AE2342C-39D9-439D-800A-D8636AFFB92A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E9A5CF7-013E-443A-ABD9-32659E9CD0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9A5CF7-013E-443A-ABD9-32659E9CD0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9A5CF7-013E-443A-ABD9-32659E9CD0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9A5CF7-013E-443A-ABD9-32659E9CD0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AE2342C-39D9-439D-800A-D8636AFFB92A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AE2342C-39D9-439D-800A-D8636AFFB92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AE2342C-39D9-439D-800A-D8636AFFB92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AE2342C-39D9-439D-800A-D8636AFFB92A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E9A5CF7-013E-443A-ABD9-32659E9CD0EE} = {48758263-8286-4AB3-9C9F-49996F82BA2B}
+		{4AE2342C-39D9-439D-800A-D8636AFFB92A} = {422D7A9C-3D98-4BBA-A152-DDAC305A27A1}
+	EndGlobalSection
+EndGlobal

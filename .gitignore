@@ -1,0 +1,9 @@
+bin/
+obj/
+*.user
+.vs/
+.DS_Store
+TestResults/
+# ad-hoc runs (raw data for the report lives in data/)
+results/
+*.zip
