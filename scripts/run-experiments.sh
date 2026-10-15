@@ -17,9 +17,8 @@ echo "== Експеримент 2: поведение при претоварв�
 "${APP[@]}" experiment --rates 500,1000,2000,3000,5000 --dops 2 \
   --policies wait,drop --duration 6 --warmup 1 --out "$OUT/exp2-wait-vs-drop"
 
-echo "== Експеримент 3: равномерни срещу поасонови пристигания близо до насищане (DOP 2) =="
-"${APP[@]}" experiment --rates 800,1100,1250 --dops 2 --arrival uniform --duration 6 --warmup 1 --out "$OUT/exp3-arrival/uniform"
-"${APP[@]}" experiment --rates 800,1100,1250 --dops 2 --arrival poisson --duration 6 --warmup 1 --out "$OUT/exp3-arrival/poisson"
+echo "== Контролно измерване + Експеримент 3 (равномерни срещу поасонови пристигания, 3 повторения) =="
+scripts/run-exp3-and-bench.sh "$OUT"
 
 echo "== Сценарии: нормален, грешки, фатална грешка, прекъсване, претоварване =="
 for sc in normal faults fatal cancel overload; do

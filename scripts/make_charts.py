@@ -71,7 +71,7 @@ class Chart:
         self.logx, self.logy = logx, logy
         self.xdomain, self.ydomain = xdomain, ydomain
         self.legend = legend
-        self.m = dict(l=64, r=110, t=44, b=52)
+        self.m = dict(l=64, r=140, t=72, b=52)
         self.series = []
         self.bars = None
 
@@ -142,7 +142,8 @@ class Chart:
                     # Заоблен само горният край (данни), долният стъпва на базовата линия.
                     out.append(f"<path d='M{bx:.1f},{m['t']+ph:.1f} V{by+r:.1f} Q{bx:.1f},{by:.1f} {bx+r:.1f},{by:.1f} "
                                f"H{bx+bw-r:.1f} Q{bx+bw:.1f},{by:.1f} {bx+bw:.1f},{by+r:.1f} V{m['t']+ph:.1f} Z' fill='{color}'/>")
-                    out.append(f"<text x='{bx+bw/2:.1f}' y='{by-4:.1f}' text-anchor='middle' font-size='10' fill='{TEXT2}'>{fmt(round(v, 1))}</text>")
+                    if len(cats) * len(groups) <= 12:  # при много стълбове етикетите се застъпват
+                        out.append(f"<text x='{bx+bw/2:.1f}' y='{by-4:.1f}' text-anchor='middle' font-size='10' fill='{TEXT2}'>{fmt(round(v, 1))}</text>")
         else:
             if self.logx:
                 xt = log_ticks(x0, x1)
@@ -178,28 +179,19 @@ class Chart:
                 out.append(f"<line x1='{lx+6:.1f}' x2='{lx+14:.1f}' y1='{ly:.1f}' y2='{ly:.1f}' stroke='{s['color']}' stroke-width='2'/>")
                 out.append(f"<text x='{lx+18:.1f}' y='{ly+4:.1f}' fill='{TEXT}'>{escape(s['name'])}</text>")
 
-        # Легенда (винаги при ≥ 2 серии)
+        # Легенда (винаги при ≥ 2 серии): собствен ред под заглавието, с пренасяне.
         names = [(s["name"], s["color"], s["dashed"]) for s in self.series] if not self.bars else \
                 [(n, c, False) for n, c, _ in self.bars[1]]
         if self.legend and len(names) >= 2:
-            lx = m["l"] + 300 if self.title and len(self.title) > 40 else m["l"] + pw
-            x = m["l"]
-            y = 34
-            items = []
+            x, y = m["l"], 40
             for n, c, dashed in names:
+                w = 30 + 6.6 * len(n)
+                if x + w > W - 10:
+                    x, y = m["l"], y + 16
                 dash = " stroke-dasharray='5 4'" if dashed else ""
-                items.append((n, c, dash))
-            # подреждаме вдясно над графиката
-            total = sum(26 + 7 * len(n) for n, _, _ in items)
-            x = W - m["r"] + 100 - total
-            x = max(x, m["l"])
-            out_leg = []
-            for n, c, dash in items:
-                out_leg.append(f"<line x1='{x}' x2='{x+16}' y1='{y}' y2='{y}' stroke='{c}' stroke-width='3'{dash}/>")
-                out_leg.append(f"<text x='{x+20}' y='{y+4}' font-size='11' fill='{TEXT2}'>{escape(n)}</text>")
-                x += 26 + 7 * len(n)
-            out += out_leg
-            # заглавието се измества нагоре, ако легендата е широка
+                out.append(f"<line x1='{x}' x2='{x+16}' y1='{y}' y2='{y}' stroke='{c}' stroke-width='3'{dash}/>")
+                out.append(f"<text x='{x+20}' y='{y+4}' font-size='11' fill='{TEXT2}'>{escape(n)}</text>")
+                x += w
         out.append("</svg>")
         return "\n".join(out)
 
@@ -241,7 +233,11 @@ def exp1():
     c = Chart("Максимална пропускателност и ускорение спрямо степента на паралелизъм",
               "степен на паралелизъм (MaxDegreeOfParallelism)", "кадъра/s (най-високата измерена)")
     c.line("линейно ускорение (идеал)", dops, [maxtp[0] * d for d in dops], MUTED, dashed=True, label=False, markers=False)
-    c.line("измерено", dops, maxtp, SERIES[0])
+    c.line("целият поток", dops, maxtp, SERIES[0])
+    bench = os.path.join(DATA, "bench-parallel.csv")
+    if os.path.exists(bench):
+        b = read_csv(bench)
+        c.line("само изчисления", [int(r["dop"]) for r in b], [num(r, "frames_per_s") for r in b], SERIES[1])
     c.save("exp1_scaling.svg")
 
     cpu = [max(num(r, "cpu_cores") for r in rows if int(r["dop"]) == d) for d in dops]
@@ -263,8 +259,9 @@ def exp2():
     cats = [fmt(r) for r in rates]
 
     def loss_pct(r):
+        # dropped ⊂ received (изхвърлени след приемане); overruns никога не са приети.
         lost = num(r, "dropped") + num(r, "overruns")
-        return 100 * lost / max(1, lost + num(r, "received"))
+        return 100 * lost / max(1, num(r, "received") + num(r, "overruns"))
 
     c = Chart("Загубени кадри при претоварване (DOP 2)", "целева входна честота (кадъра/s)", "загубени кадри (%)")
     c.grouped_bars(cats, [("Wait (overrun в сензора)", SERIES[0], [loss_pct(r) for r in wait]),
@@ -282,19 +279,22 @@ def exp2():
     c.save("exp2_age.svg")
 
 
-def exp3():
-    base = os.path.join(DATA, "exp3-arrival")
-    u, p = os.path.join(base, "uniform", "summary.csv"), os.path.join(base, "poisson", "summary.csv")
-    if not (os.path.exists(u) and os.path.exists(p)):
+def exp4():
+    base = os.path.join(DATA, "exp4-qos")
+    if not os.path.isdir(base):
         return
-    ur = sorted(read_csv(u), key=lambda r: num(r, "target_rate"))
-    pr = sorted(read_csv(p), key=lambda r: num(r, "target_rate"))
-    cats = [fmt(num(r, "target_rate")) for r in ur]
-    c = Chart("Влияние на разпределението на пристиганията (DOP 2, капацитет ≈ 1500/s)",
-              "целева входна честота (кадъра/s)", "чакане в опашката p95 (ms)")
-    c.grouped_bars(cats, [("равномерни", SERIES[0], [num(r, "queue_wait_p95_ms") for r in ur]),
-                          ("поасонови", SERIES[1], [num(r, "queue_wait_p95_ms") for r in pr])])
-    c.save("exp3_arrival.svg")
+    runs = sorted({int(d.split("run")[1]) for d in os.listdir(base) if "run" in d})
+    def tp(kind, i):
+        path = os.path.join(base, f"{kind}-run{i}", "summary.csv")
+        return num(read_csv(path)[0], "e2e_p95_ms") if os.path.exists(path) else 0
+    runs = [i for i in runs if tp("default", i) and tp("interactive", i)]
+    if not runs:
+        return
+    c = Chart("Латентност e2e p95 при вход 1100/s и DOP 2 — 8 повторения", "повторение", "e2e p95 (ms)")
+    c.grouped_bars([str(i) for i in runs],
+                   [("QoS по подразбиране", SERIES[0], [tp("default", i) for i in runs]),
+                    ("QoS USER_INTERACTIVE", SERIES[1], [tp("interactive", i) for i in runs])])
+    c.save("exp4_qos.svg")
 
 
 def scenarios():
@@ -316,7 +316,7 @@ def scenarios():
             c = Chart("Сценарий „faults“: грешки по секунди", "време от старта (s)", "брой събития",
                       xdomain=(0, max(xs)))
             c.line("повторни опити", xs, [num(r, "retries") for r in rows], SERIES[0])
-            c.line("отхвърлени кадри", xs, [num(r, "rejected") for r in rows], SERIES[1])
+            c.line("отхвърлени", xs, [num(r, "rejected") for r in rows], SERIES[1])
             c.save("scenario_faults_errors.svg")
         if sc in ("cancel", "overload"):
             c = Chart(f"Сценарий „{sc}“: максимална дълбочина на опашката", "време от старта (s)", "кадъра в опашката",
@@ -329,5 +329,5 @@ if __name__ == "__main__":
     print("Графики →", OUT)
     exp1()
     exp2()
-    exp3()
+    exp4()
     scenarios()
