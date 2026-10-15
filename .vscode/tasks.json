@@ -10,7 +10,7 @@
       "label": "build",
       "type": "process",
       "command": "dotnet",
-      "args": ["build", "${workspaceFolder}/CourseWork4.sln", "/property:GenerateFullPaths=true", "/consoleloggerparameters:NoSummary"],
+      "args": ["build", "${workspaceFolder}/Async-Parallel-Reactive-Pipeline.sln", "/property:GenerateFullPaths=true", "/consoleloggerparameters:NoSummary"],
       "problemMatcher": "$msCompile",
       "group": { "kind": "build", "isDefault": true }
     },
@@ -18,7 +18,7 @@
       "label": "test",
       "type": "process",
       "command": "dotnet",
-      "args": ["test", "${workspaceFolder}/CourseWork4.sln"],
+      "args": ["test", "${workspaceFolder}/Async-Parallel-Reactive-Pipeline.sln"],
       "problemMatcher": "$msCompile",
       "group": { "kind": "test", "isDefault": true }
     },
@@ -26,7 +26,7 @@
       "label": "build Release",
       "type": "process",
       "command": "dotnet",
-      "args": ["build", "${workspaceFolder}/CourseWork4.sln", "-c", "Release"],
+      "args": ["build", "${workspaceFolder}/Async-Parallel-Reactive-Pipeline.sln", "-c", "Release"],
       "problemMatcher": "$msCompile"
     },
     {

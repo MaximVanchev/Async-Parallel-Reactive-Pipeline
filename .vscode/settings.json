@@ -1,5 +1,5 @@
 {
-  "dotnet.defaultSolution": "CourseWork4.sln",
+  "dotnet.defaultSolution": "Async-Parallel-Reactive-Pipeline.sln",
   "files.exclude": {
     "**/bin": true,
     "**/obj": true
